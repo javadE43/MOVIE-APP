@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import {buymob} from './redux/index';
+import{useSelector,useDispatch,connect} from 'react-redux';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+          <h1>hello</h1>       
     </div>
   );
 }
 
-export default App;
+
+const mapDispatchToProps=(dispatch)=>{
+  return({
+       dispatch:(info)=>dispatch(buymob(info))
+  })
+}
+
+
+export default connect()(App);
