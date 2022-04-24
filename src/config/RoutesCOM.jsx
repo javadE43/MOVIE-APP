@@ -9,7 +9,7 @@ import Detail from '../pages/Detail';
 function RoutesCOM() {
   return (
     <div>
-         {/* <Routes> */}
+         <Routes>
           <Route
                path="/"
                element={<Home/>}
@@ -26,7 +26,7 @@ function RoutesCOM() {
                path="/:category"
                element={<Catelog/>}
                />
-         {/* </Routes> */}
+         </Routes>
 
     </div>
   )

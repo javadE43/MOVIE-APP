@@ -13,16 +13,25 @@ import RoutesCOM from './config/RoutesCOM';
 
 function App() {
   return (
-     <Routes>
-                   <Route render ={props=>(
-               <>
-                   <Header {...props}/>
-                   <RoutesCOM/>
-                   <Footer/>
-               </>
-         )}/>
-     </Routes>
+          
+    <div>
+       <Header/>
+       <RoutesCOM/>
+       <Footer/>
+    </div>
   );
 }
+
+
+
+{/* <Routes>
+<Route render ={props=>(
+<>
+<Header {...props}/>
+<RoutesCOM/>
+<Footer/>
+</>
+)}/>
+</Routes> */}
 
 export default App;

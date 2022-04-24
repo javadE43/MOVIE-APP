@@ -53,5 +53,5 @@ const tmdbApi={
     },
 }
 
-
+console.log(tmdbApi.getMoviesList())
 export default tmdbApi;
