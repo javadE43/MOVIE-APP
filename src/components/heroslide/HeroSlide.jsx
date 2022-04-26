@@ -1,8 +1,19 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect,useRef } from 'react'
 import './hero-slide.scss';
 
-import SwiperCore,{Autoplay}from 'swiper';
-import {Swiper,SwiperSlide} from 'swiper/react';
+// import Swiper core and required modules
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
+
+
 
 
 import tmdbApi,{category,movieType} from '../../api/tmdbApi'
@@ -12,7 +23,6 @@ import apiConfig from '../../api/apiConfig';
 
 function HeroSlide() {
  
-   SwiperCore.use([Autoplay]);
 
 
    const [movieItems,setmovieitems]=useState([]);
@@ -23,7 +33,7 @@ function HeroSlide() {
         try {
             const response = await tmdbApi.getMoviesList(movieType.popular, {params});
             setmovieitems(response.results.slice(1, 4));
-            console.log(response);
+            // console.log(response);
         } catch {
             console.log('error');
         }
@@ -34,30 +44,48 @@ function HeroSlide() {
 
 
   return (
-    <div className='hero-slide'>
-        <Swiper
-        modules={[Autoplay]}
-        grabCursor={true}
-        spaceBetween={0}
-        slidesPerView={1}
-        >
-                      {
-               movieItems.map((item,index)=>{
-                   return(
-                       <SwiperSlide key={index}>
-                           {({isActive})=>{
-                               <img src={apiConfig.originalImage(item.backdrop_path)} alt=''/>
-                           }}
+    <>
+  <Swiper
+      // install Swiper modules
+      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      spaceBetween={50}
+      slidesPerView={3}
+      navigation
+      pagination={{ clickable: true }}
+      scrollbar={{ draggable: true }}
+      onSwiper={(swiper) => console.log(swiper)}
+      onSlideChange={() => console.log('slide change')}
+    >
 
-                       </SwiperSlide>
-                   )    
-               })
-           }
-
+     {
+         movieItems.map((item,i)=>{
+                        return(
+                            <SwiperSlide>
+               
+                            <img src={apiConfig.originalImage(item.backdrop_path)} alt=''/>
              
-        </Swiper>
-    </div>
+                         </SwiperSlide>
+                        )   
+         })
+     }
+
+    </Swiper>
+    </>
   )
 }
 
 export default HeroSlide
+
+
+// {
+//     movieItems.map((item,index)=>{
+//         return(
+//             <SwiperSlide key={index}>
+//                 {({isActive})=>{
+//                     <img src={apiConfig.originalImage(item.backdrop_path)} alt=''/>
+//                 }}
+
+//             </SwiperSlide>
+//         )    
+//     })
+// }
